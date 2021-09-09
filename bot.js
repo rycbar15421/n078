@@ -18,6 +18,21 @@ echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
+const debugScene = new Scene('debug')
+debugScene.enter((ctx) => ctx.reply('Режим: Debug',
+    Markup.inlineKeyboard([
+    Markup.callbackButton('Покинуть режим', 'leaveDebug'),
+    ]).extra()
+))
+debugScene.action('leaveDebug', leave())
+debugScene.leave((ctx) => ctx.reply('Покидаем режим: Debug'))
+debugScene.on('text', (ctx) => ctx.reply(ctx.message.text))
+debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
+
+function debug(obj = {}) {
+  return JSON.stringify(obj, null, 4)
+}
+
 const bot = new Telegraf(process.env.BOT_TOKEN)
 const stage = new Stage([echoScene])
 bot.use(session())
@@ -28,12 +43,13 @@ bot.start((ctx) => {
   return ctx.reply('Добро пожаловать!',
     Markup.inlineKeyboard([
       Markup.callbackButton('Режим: Echo', 'enterEcho'),
+      Markup.callbackButton('Режим: Debug', 'enterDebug')
     ]).extra()
   )
   } else {
   ctx.reply('Hello')
   }
 })
-
+bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
