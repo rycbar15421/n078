@@ -14,7 +14,7 @@ bot.action('echo', (ctx) => ctx.scene.enter('echo'))
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
-    ctx.telegram.sendMessage(ctx.message.chat.id, 'Добро пожаловать!')
+    ctx.telegram.sendMessage(ctx.message.chat.id, 'Добро пожаловать!', dashboard)
   } else {
   ctx.reply('Hello')
   }
