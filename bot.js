@@ -5,12 +5,11 @@ const keyboard = Markup.inlineKeyboard([
 ])
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply('Hello'))
-
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
     ctx.telegram.sendMessage(ctx.message.chat.id, 'Добро пожаловать!')
   }
+  ctx.reply('Hello')
 })
 
 bot.help((ctx) => ctx.reply('Help message'))
