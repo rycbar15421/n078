@@ -16,7 +16,7 @@ bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 bot.launch({
   webhook: {
     domain: 'https://n078debug.herokuapp.com/',
-    port: PORT
+    port: 'PORT'
   }
 })
 
