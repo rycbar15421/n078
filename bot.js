@@ -12,7 +12,7 @@ bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
   return ctx.reply('Добро пожаловать!',
     Markup.inlineKeyboard([
-      Markup.callbackButton('Режим: Echo', 'enter_echo'),
+      Markup.callbackButton('Режим: Echo', 'enterEcho'),
     ]).extra()
   )
   } else {
@@ -20,7 +20,7 @@ bot.start((ctx) => {
   }
 })
 
-bot.action('enter_echo', (ctx) => ctx.scene.enter('echo'))
+bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 
 const { enter, leave } = Stage
 
