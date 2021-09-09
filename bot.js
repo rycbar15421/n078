@@ -37,7 +37,6 @@ bot.use(session())
 bot.use(stage.middleware())
 
 const chatID = `-1001544484628`
-const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
 
 bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
 
@@ -50,7 +49,8 @@ bot.start((ctx) => {
     ]).extra()
   )
   } else {
-  ctx.telegram.sendMessage(chatID, )
+    const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
+    ctx.telegram.sendMessage(chatID, )
   }
 })
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
