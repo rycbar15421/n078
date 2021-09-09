@@ -52,6 +52,10 @@ bot.start((ctx) => {
   ctx.reply('Hello')
   }
 })
-bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
-bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
+bot.action('enterDebug', (ctx) => {
+  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)
+  ctx.scene.enter('debug')})
+bot.action('enterEcho', (ctx) => {
+  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)
+  ctx.scene.enter('echo')})
 bot.launch()
