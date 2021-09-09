@@ -5,7 +5,6 @@ if (process.env.BOT_TOKEN === undefined) {
 }
 
 const keyboard = Markup.inlineKeyboard([
-  Markup.button.url('❤️', 'http://telegraf.js.org'),
   Markup.button.callback('Delete', 'delete')
 ])
 
