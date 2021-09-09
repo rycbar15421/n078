@@ -8,8 +8,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
     ctx.telegram.sendMessage(ctx.message.chat.id, 'Добро пожаловать!')
-  }
+  } else {
   ctx.reply('Hello')
+  }
 })
 
 bot.help((ctx) => ctx.reply('Help message'))
