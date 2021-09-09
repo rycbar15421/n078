@@ -11,10 +11,7 @@ const echoScene = new Scene('echo')
 echoScene.enter((ctx) => ctx.reply('Режим: Echo',
     Markup.inlineKeyboard([
     Markup.callbackButton('Покинуть режим', 'leaveEcho'),
-    ]).extra()
-)
-.then(ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id))
-)
+    ]).extra()))
 echoScene.action('leaveEcho', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
