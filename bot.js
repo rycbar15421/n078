@@ -10,16 +10,17 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
-    ctx.reply('Добро пожаловать!',
-      Markup.inlineKeyboard([
-        Markup.callbackButton('Режим: Echo', 'echo')
-        ]))
+  return ctx.reply('Добро пожаловать!',
+    Markup.inlineKeyboard([
+      Markup.callbackButton('Режим: Echo', 'enter_echo'),
+    ]).extra()
+  )
   } else {
   ctx.reply('Hello')
   }
 })
 
-bot.action('echo', (ctx) => ctx.scene.enter('echo'))
+bot.action('enter_echo', (ctx) => ctx.scene.enter('echo'))
 
 const { enter, leave } = Stage
 
