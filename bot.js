@@ -33,10 +33,7 @@ bot.start((ctx) => {
   }
 })
 
-bot.action('enterEcho', (ctx) => {
-  return ctx.answerCbQuery(`Запускаю режим: Echo`)
-  return ctx.scene.enter('echo')
-})
+bot.command('enterEcho', (ctx) => ctx.scene.enter('echo'))
 
 
 //bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
