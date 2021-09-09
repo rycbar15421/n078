@@ -1,24 +1,22 @@
-// npm install -g localtunnel && lt --port 3000
-const { Telegraf } = require('telegraf')
+const { Telegraf, Markup } = require('telegraf')
 
-const token = process.env.BOT_TOKEN
-const PORT = process.env.PORT || 80
+const keyboard = Markup.inlineKeyboard([
+  Markup.button.callback('Delete', 'delete')
+])
 
-const bot = new Telegraf(token)
-bot.command('image', (ctx) => ctx.replyWithPhoto({ url: 'https://picsum.photos/200/300/?random' }))
-bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
-
-// Start webhook directly
-// bot.startWebhook('/secret-path', null, 3000)
-// bot.telegram.setWebhook('https://---.localtunnel.me/secret-path')
-
-// Start webhook via launch method (preferred)
-bot.launch({
-  webhook: {
-    domain: 'https://n078debug.herokuapp.com/',
-    port: 'PORT'
+const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.start((ctx) => {
+  if (ctx.startPayload === 'yowzah') {
+    ctx.telegram.sendMessage(ctx.message.chat.id, 'Добро пожаловать!')
   }
 })
+
+
+bot.start((ctx) => ctx.reply('Hello'))
+bot.help((ctx) => ctx.reply('Help message'))
+bot.on('message', (ctx) => ctx.telegram.sendCopy(ctx.message.chat.id, ctx.message, keyboard))
+bot.action('delete', (ctx) => ctx.deleteMessage())
+bot.launch()
 
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
