@@ -49,7 +49,7 @@ bot.start((ctx) => {
   )
   } else {
     const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
-    ctx.telegram.sendMessage(chatID, )
+    ctx.telegram.sendMessage(chatID, welcome)
   }
 })
 bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
