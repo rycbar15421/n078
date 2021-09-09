@@ -25,7 +25,11 @@ echoScene.command('back', leave<Scenes.SceneContext>())
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
-
+const stage = new Scenes.Stage<Scenes.SceneContext>([greeterScene, echoScene], {
+  ttl: 10,
+})
+bot.use(session())
+bot.use(stage.middleware())
 
 bot.on('message', (ctx) => ctx.telegram.sendCopy(ctx.message.chat.id, ctx.message, keyboard))
 bot.launch()
