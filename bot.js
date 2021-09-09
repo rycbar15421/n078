@@ -34,7 +34,7 @@ function debug(obj = {}) {
 }
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const stage = new Stage([echoScene])
+const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
