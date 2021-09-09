@@ -21,7 +21,7 @@ bot.start((ctx) => {
 })
 
 bot.action('enterEcho', (ctx) => {
-  return ctx.answerCbQuery(`Oh, ${ctx.match[0]}! Great choice`)
+  return ctx.answerCbQuery(`Oh, ! Great choice`)
 })
 
 
