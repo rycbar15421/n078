@@ -5,6 +5,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 
+const chatID = `-1001544484628`
 const { enter, leave } = Stage
 
 const echoScene = new Scene('echo')
@@ -36,9 +37,6 @@ const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
-const chatID = `-1001544484628`
-
-
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
   return ctx.reply('Добро пожаловать!',
@@ -47,12 +45,16 @@ bot.start((ctx) => {
       Markup.callbackButton('Режим: Debug', 'enterDebug')
     ]).extra()
   )
-  } else {
+  } else if (ctx.chat.type === private){
     const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
     ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
   }
 })
 bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
+bot.on('text', (ctx) => {
+  if (ctx.chat.id === chatID) {
+  ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)}
+})
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
