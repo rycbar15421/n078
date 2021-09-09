@@ -38,8 +38,7 @@ bot.use(session())
 bot.use(stage.middleware())
 
 bot.help((ctx) => {
-  const message_id = `${ctx.message_id} - 1`
-  ctx.telegram.pinChatMessage(ctx.chat.id, message_id)})
+  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)})
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
