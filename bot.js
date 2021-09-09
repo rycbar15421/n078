@@ -50,7 +50,9 @@ bot.start((ctx) => {
     ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
   }
 })
-bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
+bot.on('text', (ctx) => {
+  if (ctx.chat.type === private){
+  ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)}})
 bot.on('text', (ctx) => {
   if (ctx.chat.id === chatID) {
   ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)}
