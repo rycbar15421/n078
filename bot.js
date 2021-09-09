@@ -29,7 +29,7 @@ echoScene.command('back', leave())
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
-const stage = new Stage([greeterScene, echoScene], { ttl: 10 })
+const stage = new Stage([echoScene], { ttl: 10 })
 bot.use(session())
 bot.use(stage.middleware())
 
