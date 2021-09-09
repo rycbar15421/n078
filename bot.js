@@ -26,7 +26,6 @@ debugScene.enter((ctx) => ctx.reply('Режим: Debug',
 ))
 debugScene.action('leaveDebug', leave())
 debugScene.leave((ctx) => ctx.reply('Покидаем режим: Debug'))
-debugScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
 
 function debug(obj = {}) {
