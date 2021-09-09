@@ -37,7 +37,8 @@ bot.use(session())
 bot.use(stage.middleware())
 
 bot.help((ctx) => {
-  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)})
+  const chatID = `-1001544484628`
+  ctx.telegram.forwardMessage(ctx.chat.id, chatID, ctx.message.message_id)})
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
