@@ -38,7 +38,6 @@ bot.use(stage.middleware())
 
 const chatID = `-1001544484628`
 
-bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
@@ -53,6 +52,7 @@ bot.start((ctx) => {
     ctx.telegram.sendMessage(chatID, )
   }
 })
+bot.on('text', (ctx) => {ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)})
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
