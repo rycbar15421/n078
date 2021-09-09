@@ -12,7 +12,9 @@ echoScene.enter((ctx) => ctx.reply('Режим: Echo',
     Markup.inlineKeyboard([
     Markup.callbackButton('Покинуть режим', 'leaveEcho'),
     ]).extra()
-))
+)
+.then(ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
+)
 echoScene.action('leaveEcho', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
@@ -52,10 +54,6 @@ bot.start((ctx) => {
   ctx.reply('Hello')
   }
 })
-bot.action('enterDebug', (ctx) => {
-  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)
-  ctx.scene.enter('debug')})
-bot.action('enterEcho', (ctx) => {
-  ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id)
-  ctx.scene.enter('echo')})
+bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
+bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
