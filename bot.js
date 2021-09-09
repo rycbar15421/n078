@@ -13,7 +13,7 @@ echoScene.enter((ctx) => ctx.reply('Режим: Echo',
     Markup.callbackButton('Покинуть режим', 'leaveEcho'),
     ]).extra()
 )
-.then(ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
+.then(ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message.message_id))
 )
 echoScene.action('leaveEcho', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
