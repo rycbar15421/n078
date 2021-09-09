@@ -3,10 +3,7 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
-
 const Telegraf = require('telegraf')
-
-const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const { enter, leave } = Stage
 
@@ -17,6 +14,12 @@ echoScene.command('back', leave())
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
+const stage = new Stage()
+stage.command('cancel', leave())
+
+stage.register(greeter)
+
+const bot = new Telegraf(process.env.BOT_TOKEN)
 const stage = new Stage([echoScene], { ttl: 10 })
 bot.use(session())
 bot.use(stage.middleware())
