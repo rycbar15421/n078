@@ -8,14 +8,15 @@ const Telegraf = require('telegraf')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const dashboard = Markup.inlineKeyboard([Markup.callbackButton('Режим: Echo', 'echo')])
 bot.action('echo', (ctx) => ctx.scene.enter('echo'))
-
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
     const text = 'Добро пожаловать!'
-    ctx.telegram.sendMessage(ctx.message.chat.id, text, dashboard)
+    ctx.telegram.sendMessage(ctx.message.chat.id, text,
+      Markup.inlineKeyboard([
+        Markup.callbackButton('Режим: Echo', 'echo')
+        ]))
   } else {
   ctx.reply('Hello')
   }
