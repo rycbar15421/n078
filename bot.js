@@ -33,7 +33,7 @@ bot.start((ctx) => {
   }
 })
 
-bot.command('enterEcho', (ctx) => ctx.scene.enter('echo'))
+bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 
 
 //bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
