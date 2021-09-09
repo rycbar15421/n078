@@ -13,7 +13,7 @@ echoScene.enter((ctx) => ctx.reply('Режим: Echo',
     Markup.callbackButton('Покинуть режим', 'leaveEcho'),
     ]).extra()
 ))
-echoScene.action('enterEcho', leave())
+echoScene.action('leaveEcho', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
