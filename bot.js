@@ -15,7 +15,7 @@ echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const stage = new Stage([echoScene], { ttl: 10 })
+const stage = new Stage([echoScene])
 bot.use(session())
 bot.use(stage.middleware())
 
@@ -32,9 +32,4 @@ bot.start((ctx) => {
 })
 
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
-
-
-//bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
-
-
 bot.launch()
