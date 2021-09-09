@@ -21,7 +21,7 @@ echoScene.leave((ctx) => ctx.reply('exiting echo scene'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
-const stage = new Scenes.Stage<Scenes.SceneContext>([greeterScene, echoScene], {
+const stage = new Scenes.Stage<Scenes.SceneContext>([echoScene], {
   ttl: 10,
 })
 bot.use(session())
