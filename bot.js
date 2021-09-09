@@ -45,19 +45,19 @@ bot.start((ctx) => {
       Markup.callbackButton('Режим: Debug', 'enterDebug')
     ]).extra()
   )
-  } else if (ctx.chat.type === private){
+  } else if (ctx.chat.type === 'private'){
     const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
     ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
   }
 })
-/*bot.on('text', (ctx) => {
-  if (ctx.message.chat.type === private){
+bot.on('text', (ctx) => {
+  if (ctx.message.chat.type === 'private'){
     ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
   }
-  else if (ctx.chat.id === chatID) {
+  else if (ctx.chat.id === 'chatID') {
     ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)
   }
-})*/
+})
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
