@@ -37,6 +37,8 @@ const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
+bot.help((ctx) => {ctx.telegram.pinChatMessage(ctx.chat.id, ctx.message_id)})
+
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
   return ctx.reply('Добро пожаловать!',
