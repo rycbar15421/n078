@@ -20,7 +20,12 @@ bot.start((ctx) => {
   }
 })
 
-bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
+bot.action('enterEcho', (ctx) => {
+  return ctx.answerCbQuery(`Oh, ${ctx.match[0]}! Great choice`)
+})
+
+
+//bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 
 const { enter, leave } = Stage
 
