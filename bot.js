@@ -51,7 +51,7 @@ bot.start((ctx) => {
   }
 })
 bot.on('text', (ctx) => {
-  if (ctx.chat.type === private){
+  if (ctx.message.chat.type === private){
     ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
   }
   else if (ctx.chat.id === chatID) {
