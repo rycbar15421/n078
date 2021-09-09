@@ -38,7 +38,6 @@ bot.use(session())
 bot.use(stage.middleware())
 
 bot.help((ctx) => {ctx.pinChatMessage(ctx.message_id - 1)})
-
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah') {
   return ctx.reply('Добро пожаловать!',
