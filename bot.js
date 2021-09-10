@@ -18,12 +18,8 @@ echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
 const debugScene = new Scene('debug')
-debugScene.enter((ctx) => ctx.reply('Режим: Debug',
-    Markup.inlineKeyboard([
-    Markup.callbackButton('Покинуть режим', 'leaveDebug'),
-    ]).extra()
-))
-debugScene.action('leaveDebug', leave())
+debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveKeyboard))
+debugScene.hears('Покинуть режим', leave())
 debugScene.leave((ctx) => ctx.reply('Покидаем режим: Debug'))
 debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
 
