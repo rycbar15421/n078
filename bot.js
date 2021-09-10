@@ -8,12 +8,11 @@ const Telegraf = require('telegraf')
 const chatID = `-1001544484628`
 const { enter, leave } = Stage
 
+const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
+
 const echoScene = new Scene('echo')
-echoScene.enter((ctx) => ctx.reply('Режим: Echo',
-    Markup.inlineKeyboard([
-    Markup.callbackButton('Покинуть режим', 'leaveEcho'),
-    ]).extra()))
-echoScene.action('leaveEcho', leave())
+echoScene.enter((ctx) => ctx.reply('Запускаю режим: Echo', leaveKeyboard))
+echoScene.hears('Покинуть режим', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
