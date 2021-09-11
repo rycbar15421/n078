@@ -5,6 +5,20 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 
+const gameShortName = 'dice'
+const gameUrl = 'https://rycbar15421.github.io/dice/'
+
+const markup = Extra.markup(
+  Markup.inlineKeyboard([
+    Markup.gameButton('🎮 Play now!'),
+    Markup.urlButton('Share game', 'https://telegram.me/n078bot?game=dice')
+  ])
+)
+bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
+bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
+
+
+
 const chatID = `-1001544484628`
 const { enter, leave } = Stage
 
