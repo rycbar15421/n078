@@ -12,4 +12,10 @@ function dashboard() {
     ]).extra()	
 }
 
-module.exports = { dashboard } 
+
+function debug(obj = {}) {
+  return JSON.stringify(obj, null, 4)
+}
+
+
+module.exports = { dashboard, debug } 

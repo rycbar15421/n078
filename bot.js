@@ -5,7 +5,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { dashboard } = require('./data.js')
+const { dashboard, debug } = require('./data.js')
 
 
 const gameShortName = 'dice'
@@ -39,10 +39,6 @@ debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveK
 debugScene.hears('Покинуть режим', leave())
 debugScene.leave((ctx) => ctx.reply('Покидаем режим: Debug'))
 debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
-
-function debug(obj = {}) {
-  return JSON.stringify(obj, null, 4)
-}
 
 const stage = new Stage([echoScene, debugScene])
 bot.use(session())
