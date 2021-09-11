@@ -5,14 +5,16 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
+const { dashboard } = require('./functions.js')
+
 
 const gameShortName = 'dice'
 const gameUrl = 'https://rycbar15421.github.io/dice/'
 
 const markup = Extra.markup(
   Markup.inlineKeyboard([
-    Markup.gameButton('🎮 Play now!'),
-    Markup.urlButton('Share game', 'https://telegram.me/n078bot?game=dice')
+    Markup.gameButton('🎮 Играть сейчас!'),
+    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
   ])
 )
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
@@ -47,13 +49,8 @@ bot.use(session())
 bot.use(stage.middleware())
 
 bot.start((ctx) => {
-  if (ctx.startPayload === 'yowzah') {
-  return ctx.reply('Добро пожаловать!',
-    Markup.inlineKeyboard([
-      Markup.callbackButton('Режим: Echo', 'enterEcho'),
-      Markup.callbackButton('Режим: Debug', 'enterDebug')
-    ]).extra()
-  )
+  if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
+  return ctx.reply('Добро пожаловать!', dashboard())
   } else if (ctx.chat.type === 'private'){
     const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
     ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
