@@ -5,7 +5,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { dashboard, debug, gameShortName, gameUrl, markup } = require('./data.js')
+const { dashboard, debug, gameShortName, gameUrl, markup, welcome } = require('./data.js')
 
 const chatID = `-1001544484628`
 const { enter, leave } = Stage
@@ -29,15 +29,7 @@ const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
-bot.start((ctx) => {
-  if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
-  return ctx.reply('Добро пожаловать!', dashboard())
-  } else if (ctx.chat.type === 'private'){
-    const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
-    ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
-  }
-})
-
+bot.start((ctx) => {welcome()})
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 bot.on('text', (ctx) => {

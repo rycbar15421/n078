@@ -12,7 +12,7 @@ function dashboard() {
     ]).extra()	
 }
 
-function support() {
+function welcome() {
   if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
   return ctx.reply('Добро пожаловать!', dashboard())
   } else if (ctx.chat.type === 'private'){
@@ -34,4 +34,4 @@ const markup = Extra.markup(
     Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
   ])
 )
-module.exports = { dashboard, debug, gameShortName, gameUrl, markup } 
+module.exports = { dashboard, debug, gameShortName, gameUrl, markup, welcome } 
