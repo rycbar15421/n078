@@ -9,9 +9,6 @@ const { dashboard, debug, gameShortName, gameUrl, markup } = require('./data.js'
 
 
 
-bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
-bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
-
 
 
 const chatID = `-1001544484628`
@@ -44,6 +41,9 @@ bot.start((ctx) => {
     ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
   }
 })
+
+bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
+bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 bot.on('text', (ctx) => {
   if (ctx.message.chat.type === 'private'){
     ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
