@@ -27,7 +27,7 @@ debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ct
 const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
-bot.hears(/\/me (.+)/, (ctx, match) => {me()})
+bot.hears(/\/me (.+)/, (ctx, match) => {me(ctx, match)})
 bot.start((ctx) => {welcome(ctx)})
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
