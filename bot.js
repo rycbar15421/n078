@@ -42,7 +42,6 @@ bot.use(stage.middleware())
 
 const stage = new Stage([echoScene, debugScene])
 const { enter, leave } = Stage
-const echoScene = new Scene('echo')
 echoScene.echo()
 
 bot.start((ctx) => {

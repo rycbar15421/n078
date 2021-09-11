@@ -16,8 +16,11 @@ const leaveKeyboard = Markup.keyboard(['Покинуть режим']).resize().
 
 const stage = new Stage([echoScene, debugScene])
 const { enter, leave } = Stage
+const echoScene = new Scene('echo')
+
 
 function echo() {
+
 echoScene.enter((ctx) => ctx.reply('Запускаю режим: Echo', leaveKeyboard))
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
