@@ -4,6 +4,7 @@ const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const gameShortName = 'dice'
 const gameUrl = 'https://rycbar15421.github.io/dice/'
@@ -41,7 +42,6 @@ function debug(obj = {}) {
   return JSON.stringify(obj, null, 4)
 }
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
 const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
