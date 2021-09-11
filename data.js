@@ -4,6 +4,16 @@ const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
+const chatID = `-1001544484628`
+
+let support = (ctx) => {
+  if (ctx.message.chat.type === 'private'){
+    ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
+  }
+  else if ("reply_to_message" in ctx.message && "forward_from" in ctx.message.reply_to_message) {
+    ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)
+  }
+}
 
 function dashboard() {
     return Markup.inlineKeyboard([
@@ -34,4 +44,4 @@ const markup = Extra.markup(
     Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
   ])
 )
-module.exports = { dashboard, debug, gameShortName, gameUrl, markup, welcome } 
+module.exports = { debug, gameShortName, gameUrl, markup, welcome, support } 

@@ -5,9 +5,8 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { dashboard, debug, gameShortName, gameUrl, markup, welcome } = require('./data.js')
+const { debug, gameShortName, gameUrl, markup, welcome, support } = require('./data.js')
 
-const chatID = `-1001544484628`
 const { enter, leave } = Stage
 
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
@@ -32,14 +31,7 @@ bot.use(stage.middleware())
 bot.start((ctx) => {welcome(ctx)})
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
-bot.on('text', (ctx) => {
-  if (ctx.message.chat.type === 'private'){
-    ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
-  }
-  else if ("reply_to_message" in ctx.message && "forward_from" in ctx.message.reply_to_message) {
-    ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)
-  }
-})
+bot.on('text', (ctx) => {support(ctx)})
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.launch()
