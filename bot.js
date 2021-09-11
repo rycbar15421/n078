@@ -4,8 +4,21 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
+const { debug, welcome, support, me, echo } = require('./data.js')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { debug, gameShortName, gameUrl, markup, welcome, support, me } = require('./data.js')
+
+const gameShortName = 'dice'
+const gameUrl = 'https://rycbar15421.github.io/dice/'
+
+const markup = Extra.markup(
+  Markup.inlineKeyboard([
+    Markup.gameButton('🎮 Играть сейчас!'),
+    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
+  ])
+)
+
+bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
+bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 
 const { enter, leave } = Stage
 
@@ -15,7 +28,7 @@ const echoScene = new Scene('echo')
 echoScene.enter(({reply}) => reply('Запускаю режим: Echo', leaveKeyboard))
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave(({ reply }) => reply('Покидаем режим: Echo'))
-echoScene.on('message', (ctx) => ctx.telegram.sendCopy(ctx.chat.id, ctx.message))
+echoScene.on('message', (ctx) => echo(ctx))
 //echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 //echoScene.on('message', ({ reply }) => reply('Принимаю только текстовые сообщения!'))
 
@@ -30,8 +43,6 @@ bot.use(session())
 bot.use(stage.middleware())
 bot.start((ctx) => {welcome(ctx)})
 bot.hears(/\/me (.+)/, (ctx, match) => {me(ctx, match)})
-bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
-bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 bot.on('text', (ctx) => {support(ctx)})

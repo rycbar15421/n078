@@ -41,17 +41,15 @@ let welcome = (ctx) => {
   }  
 }
 
+let echo = (ctx) => {
+  if ("text" in ctx.message || "sticker" in ctx.message || "dice" in ctx.message) {
+    ctx.telegram.sendCopy(ctx.chat.id, ctx.message)
+  }
+}
+
 function debug(obj = {}) {
   return JSON.stringify(obj, null, 4)
 }
 
-const gameShortName = 'dice'
-const gameUrl = 'https://rycbar15421.github.io/dice/'
 
-const markup = Extra.markup(
-  Markup.inlineKeyboard([
-    Markup.gameButton('🎮 Играть сейчас!'),
-    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
-  ])
-)
-module.exports = { debug, gameShortName, gameUrl, markup, welcome, support, me } 
+module.exports = { debug, welcome, support, me, echo } 
