@@ -29,7 +29,7 @@ const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
-bot.start((ctx) => {welcome()})
+bot.start((ctx) => {welcome(ctx)})
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 bot.on('text', (ctx) => {

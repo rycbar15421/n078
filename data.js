@@ -12,7 +12,7 @@ function dashboard() {
     ]).extra()	
 }
 
-function welcome = (ctx) => {
+let welcome = (ctx) => {
   if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
   return ctx.reply('Добро пожаловать!', dashboard())
   } else if (ctx.chat.type === 'private'){
