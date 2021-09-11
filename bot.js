@@ -5,7 +5,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { debug, gameShortName, gameUrl, markup, welcome, support } = require('./data.js')
+const { debug, gameShortName, gameUrl, markup, welcome, support, me } = require('./data.js')
 
 const { enter, leave } = Stage
 
@@ -27,11 +27,11 @@ debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ct
 const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
-
+bot.hears(/\/help (\w+)/, (ctx, match) => {me()})
 bot.start((ctx) => {welcome(ctx)})
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
-bot.on('text', (ctx) => {support(ctx)})
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
+bot.on('text', (ctx) => {support(ctx)})
 bot.launch()

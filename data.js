@@ -15,6 +15,16 @@ let support = (ctx) => {
   }
 }
 
+let me = (ctx, match) => {
+  msg = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) ${ctx.match[1]}`
+  replyMsg = `[${ctx.message.reply_to_message.from.first_name}](tg://user?id=${ctx.message.reply_to_message.from.id}) ${ctx.match[1]}`
+  if ("reply_to_message" in ctx.message) {
+    ctx.telegram.sendMessage(ctx.message.chat.id, replyMsg)
+  } else if (!"reply_to_message" in ctx.message) {
+    ctx.telegram.sendMessage(ctx.message.chat.id, msg)
+  }
+}
+
 function dashboard() {
     return Markup.inlineKeyboard([
       Markup.callbackButton('Режим: Echo', 'enterEcho'),
@@ -44,4 +54,4 @@ const markup = Extra.markup(
     Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
   ])
 )
-module.exports = { debug, gameShortName, gameUrl, markup, welcome, support } 
+module.exports = { debug, gameShortName, gameUrl, markup, welcome, support, me } 
