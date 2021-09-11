@@ -23,16 +23,8 @@ bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 
 
 const chatID = `-1001544484628`
-const { enter, leave } = Stage
 
-const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
 
-const echoScene = new Scene('echo')
-echoScene.enter((ctx) => ctx.reply('Запускаю режим: Echo', leaveKeyboard))
-echoScene.hears('Покинуть режим', leave())
-echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
-echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
-echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
 
 const debugScene = new Scene('debug')
 debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveKeyboard))
@@ -47,6 +39,11 @@ function debug(obj = {}) {
 const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
+
+const stage = new Stage([echoScene, debugScene])
+const { enter, leave } = Stage
+const echoScene = new Scene('echo')
+echoScene.echo()
 
 bot.start((ctx) => {
   if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {

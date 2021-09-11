@@ -12,4 +12,18 @@ function dashboard() {
     ]).extra()	
 }
 
-module.exports = { dashboard } 
+const leaveKeyboard = Markup.keyboard(['Покинуть режим']).resize().extra()
+
+const stage = new Stage([echoScene, debugScene])
+const { enter, leave } = Stage
+
+function echo() {
+echoScene.enter((ctx) => ctx.reply('Запускаю режим: Echo', leaveKeyboard))
+echoScene.hears('Покинуть режим', leave())
+echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
+echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
+echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))	
+}
+
+
+module.exports = { dashboard, echo } 
