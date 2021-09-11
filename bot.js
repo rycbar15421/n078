@@ -5,7 +5,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
-const { dashboard } = require('./functions.js')
+const { dashboard } = require('./data.js')
 
 
 const gameShortName = 'dice'
