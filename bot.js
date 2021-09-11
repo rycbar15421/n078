@@ -12,11 +12,12 @@ const { enter, leave } = Stage
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
 
 const echoScene = new Scene('echo')
-echoScene.enter(({ reply }) => reply('Запускаю режим: Echo', leaveKeyboard))
+echoScene.enter(({reply}) => reply('Запускаю режим: Echo', leaveKeyboard))
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave(({ reply }) => reply('Покидаем режим: Echo'))
-echoScene.on('text', ({ reply }) => reply(ctx.message.text))
-echoScene.on('message', ({ reply }) => reply('Принимаю только текстовые сообщения!'))
+echoScene.on('message', (ctx) = ctx.telegram.sendCopy(ctx.chat.id, ctx.message))
+//echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
+//echoScene.on('message', ({ reply }) => reply('Принимаю только текстовые сообщения!'))
 
 const debugScene = new Scene('debug')
 debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveKeyboard))
