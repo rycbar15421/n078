@@ -49,7 +49,7 @@ bot.use(session())
 bot.use(stage.middleware())
 
 bot.start((ctx) => {
-  if (ctx.startPayload === 'yowzah') {
+  if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
   return ctx.reply('Добро пожаловать!', dashboard())
   } else if (ctx.chat.type === 'private'){
     const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
