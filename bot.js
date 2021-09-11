@@ -15,7 +15,7 @@ const echoScene = new Scene('echo')
 echoScene.enter(({reply}) => reply('Запускаю режим: Echo', leaveKeyboard))
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave(({ reply }) => reply('Покидаем режим: Echo'))
-echoScene.on('message', (ctx) = ctx.telegram.sendCopy(ctx.chat.id, ctx.message))
+echoScene.on('message', (ctx) => ctx.telegram.sendCopy(ctx.chat.id, ctx.message))
 //echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
 //echoScene.on('message', ({ reply }) => reply('Принимаю только текстовые сообщения!'))
 
