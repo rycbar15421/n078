@@ -40,7 +40,6 @@ const stage = new Stage([echoScene, debugScene])
 bot.use(session())
 bot.use(stage.middleware())
 
-const stage = new Stage([echoScene, debugScene])
 const { enter, leave } = Stage
 echoScene.echo()
 
