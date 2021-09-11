@@ -18,7 +18,7 @@ let support = (ctx) => {
 let me = (ctx, match) => {
   if ("reply_to_message" in ctx.message) {
     ctx.deleteMessage(ctx.message.message_id)
-    ctx.replyWithMarkdown(`👻[${ctx.message.reply_to_message.from.first_name}](tg://user?id=${ctx.message.reply_to_message.from.id}) ${ctx.match[1]}`)
+    ctx.replyWithMarkdown(`👻 [${ctx.message.reply_to_message.from.first_name}](tg://user?id=${ctx.message.reply_to_message.from.id}) ${ctx.match[1]}`)
   } else if (true) {
     ctx.deleteMessage(ctx.message.message_id)
     ctx.replyWithMarkdown(`[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) ${ctx.match[1]}`)
