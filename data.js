@@ -17,5 +17,13 @@ function debug(obj = {}) {
   return JSON.stringify(obj, null, 4)
 }
 
+const gameShortName = 'dice'
+const gameUrl = 'https://rycbar15421.github.io/dice/'
 
-module.exports = { dashboard, debug } 
+const markup = Extra.markup(
+  Markup.inlineKeyboard([
+    Markup.gameButton('🎮 Играть сейчас!'),
+    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
+  ])
+)
+module.exports = { dashboard, debug, gameShortName, gameUrl, markup } 
