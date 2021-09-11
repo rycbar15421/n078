@@ -7,10 +7,6 @@ const Telegraf = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 const { dashboard, debug, gameShortName, gameUrl, markup } = require('./data.js')
 
-
-
-
-
 const chatID = `-1001544484628`
 const { enter, leave } = Stage
 
