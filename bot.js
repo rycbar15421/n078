@@ -16,7 +16,7 @@ echoScene.enter((ctx) => ctx.reply('Запускаю режим: Echo', leaveKey
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave((ctx) => ctx.reply('Покидаем режим: Echo'))
 echoScene.on('text', (ctx) => ctx.reply(ctx.message.text))
-echoScene.on('message', (ctx) => ctx.reply('Only text messages please'))
+echoScene.on('message', (ctx) => ctx.reply('Принимаю только текстовые сообщения!'))
 
 const debugScene = new Scene('debug')
 debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveKeyboard))

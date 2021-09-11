@@ -10,7 +10,7 @@ let support = (ctx) => {
   if (ctx.message.chat.type === 'private'){
     ctx.telegram.forwardMessage(chatID, ctx.chat.id, ctx.message.message_id)
   }
-  else if ("reply_to_message" in ctx.message && "forward_from" in ctx.message.reply_to_message) {
+  else if ("reply_to_message" in ctx.message && "forward_from" in ctx.message.reply_to_message && ctx.message.chat.id === chatID) {
     ctx.telegram.sendMessage(ctx.message.reply_to_message.forward_from.id, ctx.message.text)
   }
 }
