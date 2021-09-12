@@ -31,7 +31,7 @@ const mathMarkup = Extra.markup(
   ])
 )
 
-bot.command('math', ({ replyWithGame }) => replyWithGame(mathGameShortName, mathMarkup))
+bot.command('math', (ctx) => ctx.replyWithGame(mathGameShortName, mathMarkup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(mathGameUrl))
 
 const { enter, leave } = Stage
