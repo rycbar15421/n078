@@ -7,19 +7,6 @@ const Markup = require('telegraf/markup')
 const { debug, welcome, support, me, echo } = require('./data.js')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const gameShortName = 'dice'
-const gameUrl = 'https://rycbar15421.github.io/dice/'
-
-const markup = Extra.markup(
-  Markup.inlineKeyboard([
-    Markup.gameButton('🎮 Играть сейчас!'),
-    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
-  ])
-)
-
-bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
-bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
-
 
 const mathGameShortName = 'math'
 const mathGameUrl = 'https://rycbar15421.github.io/game_math/'
