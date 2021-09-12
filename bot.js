@@ -10,15 +10,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 const gameShortName = 'dice'
 const gameUrl = 'https://rycbar15421.github.io/dice/'
 
-const markup = Extra.markup(
-  Markup.inlineKeyboard([
-    Markup.gameButton('🎮 Играть сейчас!'),
-    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
-  ])
-)
-
-bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
-bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 
 const { enter, leave } = Stage
 
