@@ -22,7 +22,7 @@ bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 
 
 const mathGameShortName = 'math'
-const mathGameUrl = 'https://rycbar15421.github.io/math_game/'
+const mathGameUrl = 'https://rycbar15421.github.io/game_math/'
 
 const mathMarkup = Extra.markup(
   Markup.inlineKeyboard([
