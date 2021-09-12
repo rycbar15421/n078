@@ -20,6 +20,20 @@ const markup = Extra.markup(
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
 
+
+const mathGameShortName = 'math'
+const mathGameUrl = 'https://rycbar15421.github.io/math_game/'
+
+const mathMarkup = Extra.markup(
+  Markup.inlineKeyboard([
+    Markup.gameButton('🎮 Играть сейчас!'),
+    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=math')
+  ])
+)
+
+bot.command('math', ({ replyWithGame }) => replyWithGame(mathGameShortName, mathMarkup))
+bot.gameQuery(({ answerGameQuery }) => answerGameQuery(mathGameUrl))
+
 const { enter, leave } = Stage
 
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
