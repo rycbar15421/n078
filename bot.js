@@ -25,8 +25,7 @@ const { enter, leave } = Stage
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
 
 const echoScene = new Scene('echo')
-const person = (ctx) => `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id})`
-echoScene.enter(({reply}) => replyWithMarkdown(`${person(ctx)} запустил режим: Echo`, leaveKeyboard))
+echoScene.enter(({reply}) => replyWithMarkdown(`[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил режим: Echo`, leaveKeyboard))
 echoScene.hears('Покинуть режим', leave())
 echoScene.leave(({ reply }) => reply('Покидаем режим: Echo'))
 echoScene.on('message', (ctx) => echo(ctx))
