@@ -1,5 +1,4 @@
 const { Scenes, session, Telegraf, Markup, Extra } = require('telegraf')
-const Stage = require('telegraf/stage')
 const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN)
 
 const { debug, welcome, support, me, echo, rndDice } = require('./other.js')
