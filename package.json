@@ -1,19 +1,19 @@
 {
-  "name": "herokubot",
+  "name": "n078",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "16.7.x"
+    "node": "16.x.x"
   },
   "scripts": {
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "telegraf": "^4.4.1"
+    "fs": "^0.0.1-security",
+    "telegraf": "^4.4.2"
   }
 }

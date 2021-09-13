@@ -1,42 +1,12 @@
-const express = require('express')
-const app = express()
+const { Telegraf } = require('telegraf')
+const fs = require('fs')
+require('dotenv')
 
-const PORT = process.env.PORT || 80
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
-app.get('/', (req, res) => {
-	res.end(`
-	<div>
-		<nav>
-			<ul>
-				<li>
-					<a href="/">Home page</a>
-				</li>
-				<li>
-					<a href="/about">About page</a>
-				</li>
-			</ul>
-		</nav>
-		<h1>Home page</h1>
-	</div>`)
+bot.telegram.setWebhook('https://n078.herokuapp.com/secret-path', {
+  source: 'server-cert.pem'
 })
 
-app.get('/about', (req, res) => {
-	res.end(`
-	<div>
-		<nav>
-			<ul>
-				<li>
-					<a href="/">Home page</a>
-				</li>
-				<li>
-					<a href="/about">About page</a>
-				</li>
-			</ul>
-		</nav>
-		<h1>About page</h1>
-	</div>`)
-})
-
-app.listen(PORT, () => {
-	console.log('Server запущен...')
-})
+// Http webhook, for nginx/heroku users.
+bot.startWebhook('/secret-path', null, 5000)
