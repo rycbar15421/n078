@@ -39,4 +39,4 @@ class CustomScenes {
 	}
 }
 
-module.exports = { CustomScenes, checkStatus }
+module.exports = CustomScenes

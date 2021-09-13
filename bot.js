@@ -2,7 +2,7 @@ const { Scenes, session, Telegraf, Markup, Extra } = require('telegraf')
 const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN)
 
 const { debug, support, me, echo, rndDice } = require('./other.js')
-const { CustomScenes, checkStatus } = require('./scenes.js')
+const CustomScenes = require('./scenes.js')
 const curScene = new CustomScenes()
 // const adminScene = curScene.adminScene()
 // const userScene = curScene.userScene()
