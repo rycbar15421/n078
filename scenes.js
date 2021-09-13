@@ -35,4 +35,4 @@ class Scenes {
 	}
 }
 
-module.exports = { Scenes, checkStatus }
+module.exports = Scenes
