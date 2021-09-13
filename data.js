@@ -80,7 +80,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 }
 
-function rndDice = (ctx) => {
+let rndDice = (ctx) => {
   ctx.replyWithSticker(dices[getRandom()])
 }
 
