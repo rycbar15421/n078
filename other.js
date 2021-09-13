@@ -25,22 +25,6 @@ let me = (ctx, match) => {
   }
 }
 
-function dashboard() {
-    return Markup.inlineKeyboard([
-      Markup.callbackButton('Режим: Echo', 'enterEcho'),
-      Markup.callbackButton('Режим: Debug', 'enterDebug')
-    ]).extra()	
-}
-
-let welcome = (ctx) => {
-  if (ctx.startPayload === 'yowzah' || ctx.startPayload === 'y') {
-  return ctx.reply('Добро пожаловать!', dashboard())
-  } else if (ctx.chat.type === 'private'){
-    const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
-    ctx.telegram.sendMessage(chatID, welcome, Extra.markdown())
-  }  
-}
-
 let echo = (ctx) => {
   if ("text" in ctx.message || "sticker" in ctx.message || "dice" in ctx.message) {
     ctx.telegram.sendCopy(ctx.chat.id, ctx.message)

@@ -4,10 +4,19 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
-const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
+const { Scenes, checkStatus } = require('./scenes.js')
+const curScene = new Scenes()
+const adminScene = curScene.adminScene()
+const userScene = curScene.userScene()
+const stage = new Stage([adminScene, userScene])
 
+const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
+
+bot.start((ctx) => {checkStatus(ctx)});
+
+/*
 const gameShortName = 'dice'
 const gameUrl = 'https://rycbar15421.github.io/dice/'
 
@@ -20,12 +29,13 @@ const markup = Extra.markup(
 
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
+*/
 bot.command('dice', (ctx) => rndDice(ctx))
 
 const { enter, leave } = Stage
 
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
-
+/*
 const echoScene = new Scene('echo')
 echoScene.enter((ctx) => {ctx.replyWithMarkdown(`Запускаю режим: Echo`, leaveKeyboard)})
 echoScene.hears('Покинуть режим', leave())
@@ -39,13 +49,12 @@ debugScene.enter((ctx) => ctx.reply('Запускаю режим: Debug', leaveK
 debugScene.hears('Покинуть режим', leave())
 debugScene.leave((ctx) => ctx.reply('Покидаем режим: Debug'))
 debugScene.on('message', (ctx) => ctx.telegram.sendMessage(ctx.chat.id, debug(ctx.message)))
-
-const stage = new Stage([echoScene, debugScene])
+*/
 bot.use(session())
 bot.use(stage.middleware())
-bot.start((ctx) => {welcome(ctx)})
 bot.hears(/\/me (.+)/, (ctx, match) => {me(ctx, match)})
+/*
 bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
-//bot.on('text', (ctx) => {support(ctx)})
+*/
 bot.launch()
