@@ -7,6 +7,7 @@ const Markup = require('telegraf/markup')
 const { debug, welcome, support, me, echo } = require('./data.js')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
+
 const gameShortName = 'dice'
 const gameUrl = 'https://rycbar15421.github.io/dice/'
 
