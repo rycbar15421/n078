@@ -1,9 +1,4 @@
-const session = require('telegraf/session')
-const Stage = require('telegraf/stage')
-const Scene = require('telegraf/scenes/base')
-const Extra = require('telegraf/extra')
-const Markup = require('telegraf/markup')
-const Telegraf = require('telegraf')
+const { Scenes, session, Telegraf, Markup, Extra, Stage } = require('telegraf')
 const chatID = `-1001544484628`
 
 let support = (ctx) => {

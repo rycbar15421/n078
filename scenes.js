@@ -1,5 +1,4 @@
-const Scene = require('telegraf/scenes/base')
-const Markup = require('telegraf/markup')
+const { Scenes, Markup } = require('telegraf')
 
 let config = {
     "admin": 1431888270,
