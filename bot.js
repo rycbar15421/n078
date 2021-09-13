@@ -11,6 +11,8 @@ const curScene = new Scenes()
 const adminScene = curScene.adminScene()
 const userScene = curScene.userScene()
 const stage = new Stage([adminScene, userScene])
+bot.use(session())
+bot.use(stage.middleware())
 
 const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
 
