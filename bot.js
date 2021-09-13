@@ -1,49 +1,24 @@
-const Telegraf = require('telegraf')
-const session = require('telegraf/session')
+const { Scenes, session, Telegraf, Markup, Extra } = require('telegraf')
 const Stage = require('telegraf/stage')
-const Scene = require('telegraf/scenes/base')
-const Extra = require('telegraf/extra')
-const Markup = require('telegraf/markup')
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN)
 
-const Scenes = require('./scenes.js')
+const { debug, welcome, support, me, echo, rndDice } = require('./other.js')
+const { Scenes, checkStatus } = require('./scenes.js')
 const curScene = new Scenes()
-const adminScene = curScene.adminScene()
-const userScene = curScene.userScene()
-const stage = new Stage([adminScene, userScene])
+// const adminScene = curScene.adminScene()
+// const userScene = curScene.userScene()
+const welcomeScene = curScene.welcomeScene()
+const stage = new Scenes.Stage<Scenes.SceneContext>([adminScene, userScene])
+const { enter, leave } = Scenes.Stage
+
 bot.use(session())
 bot.use(stage.middleware())
-
-const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
-
-let checkStatus = (ctx) => {
+bot.start((ctx) => {
     if (ctx.message.chat.type === 'private') {
-        ctx.reply(isAdmin(ctx.message.from.id)
-            ? ctx.scene.enter('adminScene')
-            : ctx.scene.enter('userScene'));        
+        ctx.scene.enter('welcomeScene')
     }
-}
-
-
-bot.start((ctx) => {checkStatus(ctx)});
-
-/*
-const gameShortName = 'dice'
-const gameUrl = 'https://rycbar15421.github.io/dice/'
-
-const markup = Extra.markup(
-  Markup.inlineKeyboard([
-    Markup.gameButton('🎮 Играть сейчас!'),
-    Markup.urlButton('Поделиться игрой', 'https://telegram.me/n078bot?game=dice')
-  ])
-)
-
-bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
-bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
-*/
+});
 bot.command('dice', (ctx) => rndDice(ctx))
-
-const { enter, leave } = Stage
 
 const leaveKeyboard = Markup.keyboard(['Покинуть режим']).oneTime().resize().extra()
 /*
@@ -69,3 +44,7 @@ bot.action('enterDebug', (ctx) => ctx.scene.enter('debug'))
 bot.action('enterEcho', (ctx) => ctx.scene.enter('echo'))
 */
 bot.launch()
+
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
