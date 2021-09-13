@@ -17,8 +17,8 @@ function dashboard() {
 }
 
 class Scenes {
-	userScene() {
-		const userScene = new Scene('userScene')
+	userScene () {
+		const user = new Scene('user')
 		userScene.enter((ctx) => {
 		    const welcome = `[${ctx.message.from.first_name}](tg://user?id=${ctx.message.from.id}) запустил бота`
 		    ctx.telegram.sendMessage(config.admin_chat, welcome, Extra.markdown())
@@ -27,8 +27,8 @@ class Scenes {
 			ctx.telegram.forwardMessage(config.admin_chat, ctx.chat.id, ctx.message.message_id)
 		})
 	}
-	adminScene() {
-		const adminScene = new Scene('adminScene')
+	adminScene () {
+		const admin = new Scene('admin')
 		adminScene.enter((ctx) => {
 			ctx.reply('Добро пожаловать!', dashboard())
 		})
