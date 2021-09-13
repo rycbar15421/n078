@@ -6,13 +6,22 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const { Scenes, checkStatus } = require('./scenes.js')
+const Scenes = require('./scenes.js')
 const curScene = new Scenes()
 const adminScene = curScene.adminScene()
 const userScene = curScene.userScene()
 const stage = new Stage([adminScene, userScene])
 
 const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
+
+let checkStatus = (ctx) => {
+    if (ctx.message.chat.type === 'private') {
+        ctx.reply(isAdmin(ctx.message.from.id)
+            ? ctx.scene.enter('adminScene')
+            : ctx.scene.enter('userScene'));        
+    }
+}
+
 
 bot.start((ctx) => {checkStatus(ctx)});
 

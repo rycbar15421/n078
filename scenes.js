@@ -8,13 +8,6 @@ let config = {
 
 let isAdmin = (userId) => {return userId == config.admin};
 
-let checkStatus = (ctx) => {
-    if (ctx.message.chat.type === 'private') {
-        ctx.reply(isAdmin(ctx.message.from.id)
-            ? ctx.scene.enter('adminScene')
-            : ctx.scene.enter('userScene'));        
-    }
-}
 
 function dashboard() {
     return Markup.inlineKeyboard([
