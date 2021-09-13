@@ -3,6 +3,8 @@ const fs = require('fs')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
+bot.on('message', (ctx) => ctx.reply('Привет'))
+bot.launch()
 // Set telegram webhook
 // The second argument is necessary only if the client uses a self-signed
 // certificate. Including it for a verified certificate may cause things to break.
