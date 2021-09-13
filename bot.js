@@ -4,7 +4,7 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
-const { debug, welcome, support, me, echo } = require('./data.js')
+const { debug, welcome, support, me, echo, rndDice } = require('./data.js')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 
@@ -20,6 +20,7 @@ const markup = Extra.markup(
 
 bot.command('game', ({ replyWithGame }) => replyWithGame(gameShortName, markup))
 bot.gameQuery(({ answerGameQuery }) => answerGameQuery(gameUrl))
+bot.command('dice', (ctx) => rndDice(ctx))
 
 const { enter, leave } = Stage
 
