@@ -63,4 +63,4 @@ let rndDice = (ctx) => {
   ctx.replyWithSticker(dices[getRandom()])
 }
 
-module.exports = { debug, welcome, support, me, echo, rndDice } 
+module.exports = { debug, support, me, echo, rndDice } 
