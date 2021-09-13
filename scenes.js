@@ -13,7 +13,7 @@ function dashboard() {
     ]).extra()	
 }
 
-class Scenes {
+class CustomScenes {
 	welcomeScene () {
 		const welcomeScene = new Scene('welcomeScene')
 		let isAdmin = (userId) => {return userId == config.admin};
@@ -40,4 +40,4 @@ class Scenes {
 	}
 }
 
-module.exports = { Scenes, checkStatus }
+module.exports = { CustomScenes, checkStatus }
