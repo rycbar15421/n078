@@ -6,6 +6,6 @@ bot.on('message', (ctx) => ctx.reply('Привет'))
 bot.launch({
   webhook: {
     domain: 'https://n078.herokuapp.com/',
-    port: 3000
+    port: process.env.PORT
   }
 })
