@@ -1,4 +1,4 @@
-const { Telegraf } = require('telegraf')
+import { Telegraf } from 'telegraf'
 import { throttle } from 'throttle-debounce';
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
