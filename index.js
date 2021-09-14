@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf'
 import { throttle } from 'throttle-debounce';
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf('1962085701:AAGcKHT9CBw9LnAXkEtuteY3yxpTtR0v9A8')
 
 let dices = [
   "CAACAgIAAx0CXA73FAACAwFhPxPlnm3mjc9azLYWLwL048OM2QACRxAAAlk7-Un7CptapA5PhiAE",
@@ -33,18 +33,17 @@ function getRandom(min, max) {
 
 const dice = throttle(2000, (ctx) => {
 try {
-	let chatId = `-1001544484628`
-	let diceValue = getRandom()
-	let diceValuePlus1 = diceValue + 1
-	let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
-	ctx.replyWithSticker(dices[diceValue])
+  let chatId = `-1001544484628`
+  let diceValue = getRandom()
+  let diceValuePlus1 = diceValue + 1
+  let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
+  ctx.replyWithSticker(dices[diceValue])
     ctx.telegram.sendMessage(chatId, diceValueMsg)  
 } catch (err) {
     console.log(err)
   } 
 });
 
-throttle(dice, 3000)
 bot.command('dice', (ctx) => {dice(ctx)})
 
 bot.on('message', (ctx) => ctx.reply('Я умею только обрабатывать команду /dice'))
