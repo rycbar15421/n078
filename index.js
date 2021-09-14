@@ -35,7 +35,8 @@ function getRandom(min, max) {
 bot.command('dice', (ctx) => {
 	let chatId = `-1001544484628`
 	let diceValue = getRandom()
-	let diceValueMsg = `${ctx.message.from.first_name}: ${diceValue}`
+	let diceValuePlus1 = diceValue + 1
+	let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
 	ctx.replyWithSticker(dices[diceValue])
     ctx.telegram.sendMessage(chatId, diceValueMsg)
 })
