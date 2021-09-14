@@ -1,6 +1,5 @@
 const { Telegraf } = require('telegraf')
-const fs = require('fs')
-
+const throttle = require('throttle-debounce')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 let dices = [
