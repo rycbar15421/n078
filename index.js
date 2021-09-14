@@ -1,5 +1,5 @@
 const { Telegraf } = require('telegraf')
-const throttle = require('throttle-debounce')
+import { throttle } from 'throttle-debounce';
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 let dices = [
@@ -31,7 +31,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 }
 
-function dice(ctx) {
+const dice = throttle(2000, (ctx) => {
 try {
 	let chatId = `-1001544484628`
 	let diceValue = getRandom()
@@ -41,8 +41,8 @@ try {
     ctx.telegram.sendMessage(chatId, diceValueMsg)  
 } catch (err) {
     console.log(err)
-  }  
-}
+  } 
+});
 
 throttle(dice, 3000)
 bot.command('dice', (ctx) => {dice(ctx)})
