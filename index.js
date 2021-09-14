@@ -33,12 +33,16 @@ function getRandom(min, max) {
 }
 
 bot.command('dice', (ctx) => {
+try {
 	let chatId = `-1001544484628`
 	let diceValue = getRandom()
 	let diceValuePlus1 = diceValue + 1
 	let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
 	ctx.replyWithSticker(dices[diceValue])
-    ctx.telegram.sendMessage(chatId, diceValueMsg)
+    ctx.telegram.sendMessage(chatId, diceValueMsg)  
+} catch (err) {
+    console.log(err)
+  }
 })
 
 bot.on('message', (ctx) => ctx.reply('Я умею только обрабатывать команду /dice'))
