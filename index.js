@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf'
 import { throttle } from 'throttle-debounce';
-const bot = new Telegraf('1962085701:AAGcKHT9CBw9LnAXkEtuteY3yxpTtR0v9A8')
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 let dices = [
   "CAACAgIAAx0CXA73FAACAwFhPxPlnm3mjc9azLYWLwL048OM2QACRxAAAlk7-Un7CptapA5PhiAE",
