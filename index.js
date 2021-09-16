@@ -37,7 +37,7 @@ try {
   let diceValue = getRandom()
   let diceValuePlus1 = diceValue + 1
   let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
-  ctx.replyWithSticker(dices[diceValue])
+  ctx.replyWithSticker(dices[diceValue], { reply_to_message_id: ctx.message.message_id })
     ctx.telegram.sendMessage(chatId, diceValueMsg)  
 } catch (err) {
     console.log(err)
