@@ -36,7 +36,7 @@ function dev(ctx) {
   } catch(err) { console.log(err) }
 }
 
-const access = debounce(5000, (ctx) => {
+const access = throttle(5000, (ctx) => {
   try {
     let text = `[${ctx.message.from.id}](tg://user?id=${ctx.message.from.id}) запрашивает доступ`
     ctx.telegram.sendMessage('-1001544484628', text, {parse_mode: 'Markdown'})
