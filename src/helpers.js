@@ -62,7 +62,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const dice = throttle(1000, (ctx) => {
+const dice = throttle(2000, (ctx) => {
   try {
     let diceValue = getRandom()
     let diceValuePlus1 = diceValue + 1
