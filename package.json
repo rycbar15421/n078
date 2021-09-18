@@ -1,20 +1,16 @@
 {
-  "name": "n078",
+  "name": "dndbot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "16.x.x"
-  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "telegraf": "^4.4.2",
+    "telegraf": "^3.39.0",
     "throttle-debounce": "^3.0.1"
-  },
-  "type": "module"
+  }
 }

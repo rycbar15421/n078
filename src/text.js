@@ -1,8 +1,9 @@
-import { Telegraf } from 'telegraf'
-import { throttle } from 'throttle-debounce';
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const text = [
+/*0*/	"Пример текста",
+/*1*/	"user[%status%]",
+]
 
-let dices = [
+const dicesId = [
   "CAACAgIAAx0CXA73FAACAwFhPxPlnm3mjc9azLYWLwL048OM2QACRxAAAlk7-Un7CptapA5PhiAE",
   "CAACAgIAAx0CXA73FAACAwNhPxSrWLdVY8lqsgExGgLsHVP8_wAC2A8AAp0P-Um4786lEDUhoCAE",
   "CAACAgIAAx0CXA73FAACAwVhPxS0hiCtE1C7SVwNbTXZYgc3-QACjQ4AAnGpAAFKx4LcEvPSRKkgBA",
@@ -25,26 +26,5 @@ let dices = [
   "CAACAgIAAx0CXA73FAACAydhPxVnscGIqZO0566fuAIFXJHMcAACzw4AAsrH-UkpXQ82oYwxayAE"
 ]
 
-function getRandom(min, max) {
-  min = Math.ceil(0);
-  max = Math.floor(19);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
-}
+module.exports = { text, dicesId }
 
-const dice = throttle(2000, (ctx) => {
-try {
-  let chatId = `-1001544484628`
-  let diceValue = getRandom()
-  let diceValuePlus1 = diceValue + 1
-  let diceValueMsg = `${ctx.message.from.first_name}: ${diceValuePlus1}`
-  ctx.replyWithSticker(dices[diceValue], { reply_to_message_id: ctx.message.message_id })
-    ctx.telegram.sendMessage(chatId, diceValueMsg)  
-} catch (err) {
-    console.log(err)
-  } 
-});
-
-bot.command('dice', (ctx) => {dice(ctx)})
-
-bot.on('message', (ctx) => ctx.reply('Я умею только обрабатывать команду /dice'))
-bot.launch()
