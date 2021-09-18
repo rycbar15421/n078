@@ -1,4 +1,4 @@
-const {debounce} = require('throttle-debounce')
+const { debounce, throttle } = require('throttle-debounce')
 const Markup = require('telegraf/markup')
 const Extra = require('telegraf/extra')
 const { dicesId } = require('./text.js')
@@ -36,7 +36,7 @@ function dev(ctx) {
   } catch(err) { console.log(err) }
 }
 
-const access = debounce(2000, (ctx) => {
+const access = debounce(5000, (ctx) => {
   try {
     let text = `[${ctx.message.from.id}](tg://user?id=${ctx.message.from.id}) запрашивает доступ`
     ctx.telegram.sendMessage('-1001544484628', text, {parse_mode: 'Markdown'})
@@ -62,7 +62,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const dice = debounce(5000, (ctx) => {
+const dice = throttle(1000, (ctx) => {
   try {
     let diceValue = getRandom()
     let diceValuePlus1 = diceValue + 1
