@@ -7,7 +7,7 @@ var devList = [{"text": "1431888270", "callback_data": "1431888270",}]
 
 function dev(ctx) {
   try {
-    if (devList.includes(`${ctx.message.from.id}`)) {
+    if (devList.find(item => item.text == `${ctx.message.from.id}`)) {
       ctx.scene.enter('admin')
     } else {
       ctx.scene.reenter
