@@ -12,6 +12,7 @@ const stage = new Stage([adminScene, sampleScene])
 
 bot.use(session())
 bot.use(stage.middleware())
+bot.command('id', (ctx) => ctx.reply(ctx.message.from.id))
 bot.command('dice', (ctx) => dice(ctx))
 bot.command('dev', (ctx) => dev(ctx))
 bot.action(/.+/, async ({answerCbQuery}) => await answerCbQuery('🤷🏻‍♂️'))
