@@ -18,7 +18,7 @@ class CustomScenes {
 		const admin = new Scene('admin')
 		admin.enter(async ({reply}) => {await reply('Настройки', dashboardKeyboard())})
 		admin.start((ctx) => deeplink(ctx))
-		admin.action(/.+/, async ({answerCbQuery}) => {await answerCbQuery(`${ctx.match[0]}`)})
+		admin.action(/.+/, async (ctx) => {await ctx.answerCbQuery(`${ctx.match[0]}`)})
 		return admin
 	}
 }
