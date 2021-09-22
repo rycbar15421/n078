@@ -3,27 +3,7 @@ const Markup = require('telegraf/markup')
 const Extra = require('telegraf/extra')
 const { dicesId } = require('./text.js')
 
-let devList = ['1431888270']
-
-function list(ctx, match) {
-  try {
-    switch (ctx.match[1]||ctx.match[3]||ctx.match[4]) {
-      case 'add':
-      ctx.reply('Пользователь добавлен')
-      devList.push(`${ctx.match[2]}`)
-        break
-      case 'del':
-      ctx.reply('Пользователь удален')
-      devList.pop()
-        break
-      case 'list':
-      ctx.reply(devList)
-      break
-      default:
-      break
-    }
-  } catch(err) { console.log(err) }
-}
+var devList = [{"text": "1431888270", "callback_data": "1431888270",}]
 
 function dev(ctx) {
   try {
@@ -31,18 +11,11 @@ function dev(ctx) {
       ctx.scene.enter('admin')
     } else {
       ctx.scene.reenter
-      access(ctx)
     }
   } catch(err) { console.log(err) }
 }
 
-const access = throttle(15000, (ctx) => {
-  try {
-    let text = `[${ctx.message.from.id}](tg://user?id=${ctx.message.from.id}) запрашивает доступ`
-    ctx.telegram.sendMessage('-1001544484628', text, {parse_mode: 'Markdown'})
-  } catch(err) { console.log(err) }
-})
-
+/*
 function me(ctx, match) {
   try {
     if ("reply_to_message" in ctx.message) {
@@ -54,7 +27,7 @@ function me(ctx, match) {
     }
   } catch(err) { console.log(err) }
 }
-
+*/
 
 function getRandom(min, max) {
   min = Math.ceil(0);
@@ -72,21 +45,34 @@ const dice = throttle(3000, (ctx) => {
   } catch(err) { console.log(err) }
 })
 
-function enterScene(ctx) {
-    try {
-        switch (ctx.message.chat.type) {
-            case 'private':
-            ctx.scene.enter('user')
-            break
-            case 'supergroup':
-            ctx.scene.enter('group')
-            break
-            default:
-            ctx.scene.reenter
-            break
-        }
-    } catch(err) { console.log(err) }
+function isNumber( str ) {
+ return /[0-9]+/.test(str);
+}
+
+function deeplink(ctx) {
+  try {
+    if (isNumber(ctx.startPayload)) {
+      console.log('++')
+      devList.push({
+          "text": ctx.startPayload,
+          "callback_data": ctx.startPayload
+        })
+    } else {
+      switch (ctx.startPayload) {
+        case 'list':
+        ctx.reply(devList)
+        break
+        case 'del':
+        devList.pop()
+        break
+        default:
+        console.log(ctx.startPayload)
+        ctx.reply('чтож...')
+        break
+      }
+    }
+  } catch(err) { console.log(err) }
 }
 
 
-module.exports = { dice, me, dev, enterScene, list }
+module.exports = { dice, dev, deeplink }
