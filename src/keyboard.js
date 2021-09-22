@@ -8,4 +8,4 @@ function dashboardKeyboard() {
   ]).extra()  
 }
 
-module.exports = { dashboardKeyboard, scenesKeyboard, onOffkeyboard }
+module.exports = { dashboardKeyboard }
