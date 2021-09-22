@@ -3,11 +3,11 @@ const Markup = require('telegraf/markup')
 const Extra = require('telegraf/extra')
 const { dicesId } = require('./text.js')
 
-var devList = [{"text": "1431888270", "callback_data": "1431888270",}]
+var devList = ["1431888270"]
 
 function dev(ctx) {
   try {
-    if (devList.find(item => item.text == `${ctx.message.from.id}`)) {
+    if (devList.includes(`${ctx.message.from.id}`)) {
       ctx.scene.enter('admin')
     } else {
       ctx.scene.reenter
@@ -52,11 +52,7 @@ function isNumber( str ) {
 function deeplink(ctx) {
   try {
     if (isNumber(ctx.startPayload)) {
-      console.log('++')
-      devList.push({
-          "text": ctx.startPayload,
-          "callback_data": ctx.startPayload
-        })
+      devList.push(ctx.startPayload)
     } else {
       switch (ctx.startPayload) {
         case 'list':
@@ -66,8 +62,6 @@ function deeplink(ctx) {
         devList.pop()
         break
         default:
-        console.log(ctx.startPayload)
-        ctx.reply('чтож...')
         break
       }
     }
