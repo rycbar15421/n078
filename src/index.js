@@ -18,6 +18,7 @@ bot.command('group', (ctx) => {
   ctx.telegram.sendMessage('-1001540718998', 'Список Участников:',
   	{reply_markup: { inline_keyboard: [[{ text: 'Зарегестрироваться', callback_data: 'registration' },]]}})
 })
+
 bot.command('dice', (ctx) => dice(ctx))
 bot.command('dev', (ctx) => devFunc(ctx))
 bot.action('registration', (ctx) => regFunc(ctx))
