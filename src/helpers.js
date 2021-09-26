@@ -70,7 +70,7 @@ function checkAction(ctx) {
     return false
   } else if (playerListId.includes(`${ctx.update.callback_query.from.id}`)) {
     return true
-  } else { leave() }
+  } else { return false }
 }
 // Проверка состояния --------------------------------------------
 
