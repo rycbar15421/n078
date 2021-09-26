@@ -75,11 +75,11 @@ function checkAction(ctx) {
   if (spectatorList.includes(`${ctx.update.callback_query.from.id}`)) {
     ctx.answerCbQuery('Вы только наблюдаете', true)
     return false
-  } else if (deadList.includes(`${ctx.update.callback_query.from.id}`)) {
-    ctx.answerCbQuery('Вас убили или посадили!', true)
-    return false
   } else if (playerListId.includes(`${ctx.update.callback_query.from.id}`)) {
     ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения', true)
+    return false
+  } else if (deadList.includes(`${ctx.update.callback_query.from.id}`)) {
+    ctx.answerCbQuery('Вас убили или посадили!', true)
     return false
   } else { return true }
 }
