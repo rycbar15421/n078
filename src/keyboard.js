@@ -1,11 +1,22 @@
 const { Extra, Markup } = require('telegraf')
+const { playerListSettings } = require('./helpers')
 
+let dashboard = [
+{text: 'Список игроков', callback_data: 'playerList'}
+]
 
 function dashboardKeyboard() {
   return Markup
-  .inlineKeyboard([
-  	[ Markup.callbackButton('Сцены', 'sceneHome')],
-  ]).extra()  
+  .inlineKeyboard(dashboard, { columns: 2 }).extra()  
 }
 
-module.exports = { dashboardKeyboard }
+function scenesKeyboard() {
+	return Markup.inlineKeyboard([
+		[Markup.callbackButton('Текущая сцена', 'curScene')],
+		[Markup.callbackButton('user[]', 'userScene'), Markup.callbackButton('admin[]', 'adminScene')],
+		[Markup.callbackButton('publicChat[]', 'publicChatScene')],
+    [Markup.callbackButton('support[]', 'supportScene')]
+		]).extra()
+}
+
+module.exports = { dashboardKeyboard, scenesKeyboard }

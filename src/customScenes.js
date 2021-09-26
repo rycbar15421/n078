@@ -1,8 +1,8 @@
 const Telegraf = require('telegraf')
 const { Extra, Markup, Stage, session } = Telegraf
 const Scene = require('telegraf/scenes/base')
-const { dice, dev, deeplink } = require('./helpers')
-const { dashboardKeyboard, scenesKeyboard, onOffkeyboard } = require('./keyboard')
+const { dice, regFunc, devFunc, deeplinkFunc, killPlayer, checkAction, playerListKeyboard } = require('./helpers')
+const { dashboardKeyboard, scenesKeyboard } = require('./keyboard')
 
 class CustomScenes {
 	SampleScene() {
@@ -14,12 +14,27 @@ class CustomScenes {
 		return sample
 	}
 
-	AdminCustomScene () {
+	AdminScene () {
 		const admin = new Scene('admin')
 		admin.enter(async ({reply}) => {await reply('Настройки', dashboardKeyboard())})
-		admin.start((ctx) => deeplink(ctx))
+		admin.start(async (ctx) => await deeplink(ctx))
+		admin.action('playerList', async (ctx) => await ctx.editMessageText('Участники', playerListKeyboard()))
+		admin.action('back', async (ctx) => await ctx.editMessageText('Настройки', dashboardKeyboard()))
+		admin.action(/player_[0-9]/, async (ctx) => await killPlayer(ctx))
 		admin.action(/.+/, async (ctx) => {await ctx.answerCbQuery(`${ctx.match[0]}`)})
 		return admin
+	}
+
+	PlayerScene() {
+		const player = new Scene('player')
+		player.on('message', (ctx) => console.log('player.message'))
+		player.action('registration', async (ctx) => {
+			if (checkAction(ctx)) {
+				await ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения')	
+			} else { ctx.scene.reenter }
+		})
+		player.action(/.+/, async (ctx) => await ctx.answerCbQuery())
+		return player
 	}
 }
 
