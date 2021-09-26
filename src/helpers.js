@@ -25,7 +25,8 @@ function playerListKeyboard() {
 }
 
 // Сбросить ---------------------------------------
-function reset() {
+function reset(ctx) {
+  ctx.answerCbQuery()
   playerList = ["[D&D Мастер](tg://user?id=1431888270)",]
   playerListSettings = [{text: 'Сбросить', callback_data: 'reset'}, {text: 'Назад', callback_data: 'back'}]
   playerListId = []
@@ -67,9 +68,9 @@ function checkAction(ctx) {
   } else if (deadList.includes(`${ctx.update.callback_query.from.id}`)) {
     ctx.answerCbQuery("Вас убили или посадили!", true)
     return false
-  } else {
+  } else if (playerListId.includes(`${ctx.update.callback_query.from.id}`)) {
     return true
-  }
+  } else { leave() }
 }
 // Проверка состояния --------------------------------------------
 
