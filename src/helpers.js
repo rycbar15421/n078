@@ -93,7 +93,7 @@ function regFunc(ctx) {
       let name = ctx.update.callback_query.from.first_name
       let id = ctx.update.callback_query.from.id
       playerList.push(`[${name}](tg://user?id=${id})`)
-      playerListId.push(id)
+      playerListId.push(`${id}`)
       playerListSettings.unshift({
         text: `${name}`,
         callback_data: `player_${id}`,
