@@ -34,7 +34,7 @@ class CustomScenes {
 		player.action('registration', async (ctx) => {
 			if (checkAction(ctx)) {
 				await ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения', true)	
-			} else { leave() }
+			} else { ctx.scene.leave('player') }
 		})
 		player.action(/.+/, async (ctx) => await ctx.answerCbQuery())
 		return player

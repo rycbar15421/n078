@@ -68,7 +68,9 @@ function checkAction(ctx) {
   } else if (deadList.includes(`${ctx.update.callback_query.from.id}`)) {
     ctx.answerCbQuery("Вас убили или посадили!", true)
     return false
-  } else { return true }
+  } else if (playerListId.includes(`${ctx.update.callback_query.from.id}`)) {
+    return true
+  } else { return false }
 }
 // Проверка состояния --------------------------------------------
 
