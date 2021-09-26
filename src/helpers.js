@@ -10,7 +10,7 @@ if (checkAction(ctx)) {
 */
 
 let playerList = ["[D&D Мастер](tg://user?id=1431888270)",]
-let playerListSettings = [{text: 'Назад', callback_data: 'back'}]
+let playerListSettings = [{text: 'Сбросить', callback_data: 'reset'}, {text: 'Назад', callback_data: 'back'}]
 let devList = ['1431888270']
 let spectatorList = []
 let playerListId = []
@@ -23,6 +23,16 @@ function isNumber( str ) {
 function playerListKeyboard() {
   return Markup.inlineKeyboard(playerListSettings, { columns: 2 }).extra()
 }
+
+// Сбросить ---------------------------------------
+function reset() {
+  playerList = ["[D&D Мастер](tg://user?id=1431888270)",]
+  playerListSettings = [{text: 'Сбросить', callback_data: 'reset'}, {text: 'Назад', callback_data: 'back'}]
+  playerListId = []
+  deadList = []
+  spectatorList = []
+}
+// Сбросить ---------------------------------------
 
 // Убить игрока -----------------------------------
 function killPlayer(ctx) {
