@@ -31,7 +31,7 @@ class CustomScenes {
 		player.on('message', (ctx) => console.log('player.message'))
 		player.action('registration', async (ctx) => {
 			if (checkAction(ctx)) {
-				await ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения')	
+				await ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения', true)	
 			} else { ctx.scene.reenter }
 		})
 		player.action(/.+/, async (ctx) => await ctx.answerCbQuery())

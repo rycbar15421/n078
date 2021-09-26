@@ -76,7 +76,7 @@ function checkAction(ctx) {
 // Регистрация в игру --------------------------------------------
 function regFunc(ctx) {
   try {
-    ctx.answerCbQuery('Присоединились к игре')
+    ctx.answerCbQuery('Присоединились к игре', true)
     let name = ctx.update.callback_query.from.first_name
     let id = ctx.update.callback_query.from.id
     playerList.push(`[${name}](tg://user?id=${id})`)
@@ -174,4 +174,4 @@ function getRandom(min, max) {
 }
 // Кубик -----------------------------------
 
-module.exports = { dice, regFunc, devFunc, deeplinkFunc, playerListSettings, killPlayer, checkAction, playerListKeyboard }
+module.exports = { dice, regFunc, devFunc, deeplinkFunc, playerListSettings, killPlayer, checkAction, playerListKeyboard, reset }
