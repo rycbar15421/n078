@@ -73,37 +73,37 @@ function killPlayer(ctx) {
 // Проверка состояния --------------------------------------------
 function checkAction(ctx) {
   if (spectatorList.includes(`${ctx.update.callback_query.from.id}`)) {
-    ctx.answerCbQuery("Вы только наблюдаете", true)
+    ctx.answerCbQuery('Вы только наблюдаете', true)
     return false
   } else if (deadList.includes(`${ctx.update.callback_query.from.id}`)) {
-    ctx.answerCbQuery("Вас убили или посадили!", true)
+    ctx.answerCbQuery('Вас убили или посадили!', true)
     return false
   } else if (playerListId.includes(`${ctx.update.callback_query.from.id}`)) {
-    return true
-  } else { return false }
+    ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения', true)
+    return false
+  } else { return true }
 }
 // Проверка состояния --------------------------------------------
 
 // Регистрация в игру --------------------------------------------
 function regFunc(ctx) {
   try {
-    ctx.answerCbQuery('Присоединились к игре', true)
-    let name = ctx.update.callback_query.from.first_name
-    let id = ctx.update.callback_query.from.id
-    playerList.push(`[${name}](tg://user?id=${id})`)
-    playerListId.push(id)
-    playerListSettings.unshift({
-      text: `${name}`,
-      callback_data: `player_${id}`,
-      done: 'true'
-    })
-    ctx.editMessageText(playerListFunc(), Extra.markdown().markup(
-    Markup.inlineKeyboard([
-      Markup.callbackButton('Зарегестрироваться', 'registration')
-    ])))
-    if (playerListId.includes(ctx.update.callback_query.from.id)) {
-      ctx.scene.enter('player')
-    } else { ctx.scene.reenter }
+    if (checkAction(ctx)) {
+      ctx.answerCbQuery('Присоединились к игре', true)
+      let name = ctx.update.callback_query.from.first_name
+      let id = ctx.update.callback_query.from.id
+      playerList.push(`[${name}](tg://user?id=${id})`)
+      playerListId.push(id)
+      playerListSettings.unshift({
+        text: `${name}`,
+        callback_data: `player_${id}`,
+        done: 'true'
+      })
+      ctx.editMessageText(playerListFunc(), Extra.markdown().markup(
+      Markup.inlineKeyboard([
+        Markup.callbackButton('Зарегестрироваться', 'registration')
+      ])))
+    }
   } catch(err) { console.log(err) }
 }
 

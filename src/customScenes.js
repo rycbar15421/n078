@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf')
 const { Extra, Markup, Stage, session } = Telegraf
 const Scene = require('telegraf/scenes/base')
-const { killPlayer, checkAction, playerListKeyboard, reset, list } = require('./helpers')
+const { killPlayer, regFunc, playerListKeyboard, reset, list } = require('./helpers')
 const { dashboardKeyboard, scenesKeyboard } = require('./keyboard')
 
 const { leave } = Stage
@@ -32,11 +32,7 @@ class CustomScenes {
 	PlayerScene() {
 		const player = new Scene('player')
 		player.on('message', (ctx) => console.log('player.message'))
-		player.action('registration', async (ctx) => {
-			if (checkAction(ctx)) {
-				await ctx.answerCbQuery('Вы уже находитесь в игре, ожидайте завершения', true)	
-			} else { ctx.scene.leave('player') }
-		})
+		player.action('registration', async (ctx) => await regFunc(ctx))
 		player.action(/.+/, async (ctx) => await ctx.answerCbQuery())
 		return player
 	}
