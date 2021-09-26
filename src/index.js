@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf')
 const { Extra, Markup, Stage, session } = Telegraf
 const { devFunc, dice, regFunc } = require('./helpers')
-const bot = new Telegraf('1962085701:AAGcKHT9CBw9LnAXkEtuteY3yxpTtR0v9A8')
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const CustomScenes = require('./customScenes')
 const curScene = new CustomScenes()
