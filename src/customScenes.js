@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf')
 const { Extra, Markup, Stage, session } = Telegraf
 const Scene = require('telegraf/scenes/base')
-const { dice, regFunc, devFunc, deeplinkFunc, killPlayer, checkAction, playerListKeyboard } = require('./helpers')
+const { killPlayer, checkAction, playerListKeyboard, reset } = require('./helpers')
 const { dashboardKeyboard, scenesKeyboard } = require('./keyboard')
 
 class CustomScenes {
@@ -20,6 +20,7 @@ class CustomScenes {
 		admin.start(async (ctx) => await deeplink(ctx))
 		admin.action('playerList', async (ctx) => await ctx.editMessageText('Участники', playerListKeyboard()))
 		admin.action('back', async (ctx) => await ctx.editMessageText('Настройки', dashboardKeyboard()))
+		admin.action('reset', async () => await reset())
 		admin.action(/player_[0-9]/, async (ctx) => await killPlayer(ctx))
 		admin.action(/.+/, async (ctx) => {await ctx.answerCbQuery(`${ctx.match[0]}`)})
 		return admin
