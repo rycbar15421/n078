@@ -1,7 +1,7 @@
 const Telegraf = require('telegraf')
 const { Extra, Markup, Stage, session } = Telegraf
 const Scene = require('telegraf/scenes/base')
-const { killPlayer, regFunc, playerListKeyboard, reset, list } = require('./helpers')
+const { killPlayer, regFunc, playerListKeyboard, reset, list, deeplinkFunc } = require('./helpers')
 const { dashboardKeyboard, scenesKeyboard } = require('./keyboard')
 
 const { leave } = Stage
@@ -19,7 +19,7 @@ class CustomScenes {
 	AdminScene () {
 		const admin = new Scene('admin')
 		admin.enter(async ({reply}) => {await reply('Настройки', dashboardKeyboard())})
-		admin.start(async (ctx) => await deeplink(ctx))
+		admin.start(async (ctx) => await deeplinkFunc(ctx))
 		admin.action('playerList', async (ctx) => await ctx.editMessageText('Участники', playerListKeyboard()))
 		admin.action('back', async (ctx) => await ctx.editMessageText('Настройки', dashboardKeyboard()))
 		admin.action('reset', async (ctx) => await reset(ctx))
