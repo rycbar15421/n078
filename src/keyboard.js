@@ -2,7 +2,8 @@ const { Extra, Markup } = require('telegraf')
 const { playerListSettings } = require('./helpers')
 
 let dashboard = [
-{text: 'Список игроков', callback_data: 'playerList'}
+{text: 'Список игроков', callback_data: 'playerList'},
+{text: 'Список', callback_data: 'list'}
 ]
 
 function dashboardKeyboard() {

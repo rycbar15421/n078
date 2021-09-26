@@ -35,6 +35,16 @@ function reset(ctx) {
 }
 // Сбросить ---------------------------------------
 
+function list(ctx) {
+  ctx.answerCbQuery()
+  ctx.reply(`devList: ${devList}`)
+  ctx.reply(`spectatorList: ${spectatorList}`)
+  ctx.reply(`playerListId: ${playerListId}`)
+  ctx.reply(`deadList: ${deadList}`)
+  ctx.reply(playerListSettings)  
+}
+
+
 // Убить игрока -----------------------------------
 function killPlayer(ctx) {
   try {
@@ -175,4 +185,5 @@ function getRandom(min, max) {
 }
 // Кубик -----------------------------------
 
-module.exports = { dice, regFunc, devFunc, deeplinkFunc, playerListSettings, killPlayer, checkAction, playerListKeyboard, reset }
+module.exports = 
+{ dice, regFunc, devFunc, deeplinkFunc, playerListSettings, killPlayer, checkAction, playerListKeyboard, reset, list }
