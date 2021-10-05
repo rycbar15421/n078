@@ -11,7 +11,7 @@ bot.hears(/.+/, (ctx) => {
 })
 bot.action(/.+/, (ctx) => {
 	try {
-		if (ctx.message.chat.type == 'private' || false) {
+		if ('message.chat.type' in ctx.update) {
 			ctx.answerCbQuery(`${ctx.match[0]}`)
 			ctx.reply(JSON.stringify(ctx.update, null, 4))
 		} else { ctx.answerCbQuery(`${ctx.match[0]}`) }
