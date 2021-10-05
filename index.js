@@ -9,5 +9,10 @@ bot.hears(/.+/, (ctx) => {
 		ctx.reply(err.name + ': ' + err.message)
 	}
 })
-bot.action(/.+/, (ctx) => ctx.answerCbQuery(`${ctx.match[0]}`))
+bot.action(/.+/, (ctx) => {
+	try {
+		ctx.answerCbQuery(`${ctx.match[0]}`)
+		ctx.reply(JSON.stringify(ctx.update, null, 4))
+	} catch(err) { ctx.reply(err.name + ': ' + err.message) }
+})
 bot.launch()
