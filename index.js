@@ -15,6 +15,6 @@ bot.action(/.+/, (ctx) => {
 			ctx.answerCbQuery(`${ctx.match[0]}`)
 			ctx.reply(JSON.stringify(ctx.update, null, 4))
 		} else { ctx.answerCbQuery(`${ctx.match[0]}`) }
-	} catch(err) { ctx.sendMessage(1431888270, err.name + ': ' + err.message) }
+	} catch(err) { console.log(err) }
 })
 bot.launch()
