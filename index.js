@@ -12,9 +12,9 @@ bot.hears(/.+/, (ctx) => {
 bot.action(/.+/, (ctx) => {
 	try {
 		if ('message.chat.type' in ctx.update) {
-			ctx.answerCbQuery(`${ctx.match[0]}`)
+			ctx.answerCbQuery('private')
 			ctx.reply(JSON.stringify(ctx.update, null, 4))
-		} else { ctx.answerCbQuery(`${ctx.match[0]}`) }
+		} else { ctx.answerCbQuery('non-private') }
 	} catch(err) { console.log(err) }
 })
 bot.launch()
