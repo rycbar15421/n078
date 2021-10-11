@@ -11,5 +11,5 @@ let func = (ctx) => {
 		}
 	} catch(err) { ctx.reply(err.name + ': ' + err.message) }
 } 
-bot.action(/.+/, (ctx) => ctx.answerCbQuery(`${ctx.match[0]}`))
+bot.action(/.+/, (ctx) => ctx.answerCbQuery(`${ctx.match[0]}`, true))
 bot.launch()
